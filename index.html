@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(16, 13, 13);
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator {
+    border: 2px solid #ff8c00;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: #282c34;
+}
+
+#display {
+    width: 90%;
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #111215;
+    color: white;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+button {
+    padding: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color:black;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgba(19, 16, 16,0.8);
+}
+
+.operator {
+    background-color: #ff8c00;
+}
+
+.operator:hover {
+    background-color: #d17e00;
+}
+
+    </style>
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button class="operator" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="backspace()">&#9003;</button>
+            <button class="operator" onclick="bracket()">&#40;&#41;</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('00')">00</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button class="operator" onclick="calculateResult()">=</button>
+            
+            
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+function appendToDisplay(value) {
+    display.value += value;
+}
+
+function clearDisplay() {
+    display.value = '';
+}
+
+function backspace() {
+    display.value = display.value.slice(0, -1);
+}
+function leftbra(){
+    display.value += '(';
+}
+function rightbra(){
+    display.value += ')';
+}
+
+
+let bracketSwitch = false;
+
+function bracket(){
+    var prac;
+    if(!bracketSwitch){
+        prac = "("
+    } else {
+        prac = ")"
+    };
+    bracketSwitch = !bracketSwitch;
+    display.value +=prac;
+}
+
+function calculateResult() {
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
+
+    </script>
+</body>
+</html>
